@@ -1,5 +1,6 @@
 package com.bkmarriott.reservationservice.reservation.domain;
 
+import com.bkmarriott.reservationservice.reservation.application.exception.NoAvailableRoomsException;
 import com.bkmarriott.reservationservice.reservation.domain.vo.RoomType;
 import java.time.LocalDate;
 import java.util.List;
@@ -46,4 +47,10 @@ public class Inventory {
 
     return startDate.datesUntil(endDate).toList(); // endDate 제외
   }
+
+  public int getAvailableRoomCount(){
+    if(totalInventory <= totalReserved) throw new NoAvailableRoomsException("남은 방이 없습니다.");
+    return totalInventory - totalReserved;
+  }
+
 }

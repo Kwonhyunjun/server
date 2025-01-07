@@ -5,8 +5,14 @@ import static com.bkmarriott.reservationservice.reservation.infrastructure.persi
 import com.bkmarriott.reservationservice.reservation.application.dto.InventoryQueryRequestDto;
 import com.bkmarriott.reservationservice.reservation.application.dto.InventoryQueryResponseDto;
 import com.bkmarriott.reservationservice.reservation.application.dto.QInventoryQueryResponseDto;
+import com.bkmarriott.reservationservice.reservation.domain.vo.InventoryQuery;
+import com.bkmarriott.reservationservice.reservation.infrastructure.persistence.entity.RoomEntityType;
+import com.bkmarriott.reservationservice.reservation.infrastructure.persistence.entity.RoomTypeInventoryEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import java.util.List;
+
+import jakarta.persistence.LockModeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -32,5 +38,19 @@ public class InventoryQueryDslRepository {
         .fetch();
   }
 
+    public List<RoomTypeInventoryEntity> findInventoryFromReservation(InventoryQuery query) {
+        return queryFactory
+                .selectFrom(roomTypeInventoryEntity)
+                .where(
+                        roomTypeInventoryEntity.id.hotelId.eq(query.hotelId())
+                                .and(roomTypeInventoryEntity.id.date.between(query.startDate(), query.endDate()))
+                                .and(roomTypeInventoryEntity.id.roomType.eq(RoomEntityType.fromDomain(query.roomType())))
+                )
+                .orderBy(
+                        roomTypeInventoryEntity.totalInventory.subtract(roomTypeInventoryEntity.totalReserved).asc()
+                )
+                .setLockMode(LockModeType.OPTIMISTIC)
+                .fetch();
+    }
 
 }

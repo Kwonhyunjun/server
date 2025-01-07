@@ -8,6 +8,7 @@ import com.bkmarriott.reservationservice.reservation.application.outputport.Inve
 import com.bkmarriott.reservationservice.reservation.application.outputport.ReservationQueryOutputPort;
 import com.bkmarriott.reservationservice.reservation.domain.Inventory;
 import com.bkmarriott.reservationservice.reservation.domain.Reservation;
+import com.bkmarriott.reservationservice.reservation.domain.vo.InventoryQuery;
 import com.bkmarriott.reservationservice.reservation.domain.vo.ReservationStatus;
 import com.bkmarriott.reservationservice.reservation.presentation.rest.dto.query.InventoryQuery.Response;
 import com.bkmarriott.reservationservice.reservation.application.exception.ResourceNotFoundException;
@@ -80,5 +81,14 @@ public List<Response> getInventoryQuantity(Long hotelId, LocalDate startDate, Lo
     }
 
     return availableRooms.stream().map(Response::from).toList();
+  }
+
+  public int getAvailableRoomCount(InventoryQuery query) {
+    List<Inventory> inventoryFromReservation = inventoryQueryOutputPort.findInventoryFromReservation(query);
+
+    return inventoryFromReservation.stream()
+            .mapToInt(Inventory::getAvailableRoomCount)
+            .min()
+            .orElseThrow(() -> new ResourceNotFoundException("해당 예약정보에 해당하는 객실 정보를 찾을 수 없습니다."));
   }
 }
