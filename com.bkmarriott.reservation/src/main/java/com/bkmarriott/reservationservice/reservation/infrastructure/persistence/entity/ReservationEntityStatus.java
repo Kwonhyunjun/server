@@ -1,6 +1,7 @@
 package com.bkmarriott.reservationservice.reservation.infrastructure.persistence.entity;
 
 import com.bkmarriott.reservationservice.reservation.domain.vo.ReservationStatus;
+
 import java.util.Objects;
 
 public enum ReservationEntityStatus {
@@ -15,4 +16,6 @@ public enum ReservationEntityStatus {
     }
     throw new IllegalArgumentException("Invalid status: " + this.name());
   }
+
+  public static ReservationEntityStatus fromDomain(ReservationStatus reservationStatus) { return ReservationEntityStatus.valueOf(reservationStatus.name());}
 }
