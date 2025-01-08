@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 
 @DisplayName("[Domain] [Unit] PaymentTest VO Test")
-public class PaymentTest {
+public class PaymentForCreateTest {
 
     @Test
     @DisplayName("[성공] 객체 생성 테스트 - 유효한 정보가 주어진 경우 객체를 생성한다.")
@@ -22,7 +22,7 @@ public class PaymentTest {
 
         // When & Then
         Assertions.assertAll(
-                () -> Assertions.assertDoesNotThrow(() -> new Payment(method, cardNumber, expiryDate, cvv, appliedCoupon, originalPrice, finalPrice))
+                () -> Assertions.assertDoesNotThrow(() -> new PaymentForCreate(null, method, cardNumber, expiryDate, cvv, appliedCoupon, originalPrice, finalPrice))
         );
     }
 }

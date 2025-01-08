@@ -14,12 +14,13 @@ public class InventoryQueryTest {
     void inventoryConstruct_successTest() {
         // Given
         Long hotelId = 1L;
+        Long userId = 0L;
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now();;
         RoomType roomType = RoomType.DELUXE;
-        Payment payment = null;
+        PaymentForCreate paymentForCreate = null;
 
-        ReservationForCreate reservationForCreate = new ReservationForCreate(hotelId, roomType, startDate, endDate, payment);
+        ReservationForCreate reservationForCreate = new ReservationForCreate(hotelId, userId, roomType, startDate, endDate, paymentForCreate);
 
         // When & Then
         Assertions.assertAll(

@@ -14,14 +14,15 @@ public class ReservationForCreateTest {
     void reservationForCreateConstruct_successTest() {
         // Given
         Long hotelId = 1L;
+        Long userId = 1L;
         RoomType roomType = RoomType.DELUXE;
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now();;
-        Payment payment = null;
+        PaymentForCreate paymentForCreate = null;
 
         // When & Then
         Assertions.assertAll(
-                () -> Assertions.assertDoesNotThrow(() -> new ReservationForCreate(hotelId, roomType, startDate, endDate, payment))
+                () -> Assertions.assertDoesNotThrow(() -> new ReservationForCreate(hotelId, userId, roomType, startDate, endDate, paymentForCreate))
         );
     }
 }
