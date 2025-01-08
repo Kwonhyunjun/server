@@ -4,8 +4,9 @@ import java.time.LocalDate;
 
 public record ReservationForCreate (
         Long hotelId,
+        Long userId,
         RoomType roomType,
         LocalDate startDate,
         LocalDate endDate,
-        Payment payment
+        PaymentForCreate paymentForCreate
 ) {}

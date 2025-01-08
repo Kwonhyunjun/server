@@ -22,4 +22,5 @@ public class Reservation {
   private LocalDate endDate;
   private RoomType roomType;
   private ReservationStatus status;
+  private Long roomId;
 }

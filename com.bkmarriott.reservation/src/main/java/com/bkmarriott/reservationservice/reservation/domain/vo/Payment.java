@@ -1,11 +1,11 @@
 package com.bkmarriott.reservationservice.reservation.domain.vo;
 
 public record Payment(
-        String method,
-        String cardNumber,
-        String expiryDate,
-        String cvv,
-        Long appliedCoupon,
+        Long paymentId,
+        Long reservationId,
         Long originalPrice,
-        Long finalPrice
+        Long finalPrice,
+        String paymentType,
+        String transactionalId,
+        Long appliedCoupon
 ) {}
