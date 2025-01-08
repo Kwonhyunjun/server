@@ -35,6 +35,7 @@ CREATE TABLE M_ROOM_TYPE_INVENTORY
     UPDATED_AT      DATETIME(6)                                  NOT NULL,
     UPDATED_BY      BIGINT                                       NOT NULL,
     DELETED_AT      DATETIME(6)                                  NULL,
-    DELETED_BY      BIGINT                                       NULL
+    DELETED_BY      BIGINT                                       NULL,
+    VERSION         INT                                          NOT NULL
 );
 

@@ -23,6 +23,8 @@ public class Inventory {
   private int totalInventory;
   private int totalReserved;
 
+  private int version;
+
   public static Inventory of(Long hotelId, LocalDate date, RoomType roomType, int totalInventory,int totalReserved) {
     return Inventory.builder()
         .hotelId(hotelId)
